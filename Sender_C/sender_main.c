@@ -4,10 +4,11 @@
 
 
 
-void main()
+int main()
 {
 	sender_main();
 	getchar();
+	return 0;
 }
 
 

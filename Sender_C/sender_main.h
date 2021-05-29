@@ -12,7 +12,7 @@ extern int Msg_Handler(send_type_en passed_send_type , const char *disp_msg);
 
 typedef int (*pfnCSVhandler)(void);
 typedef char* (*pfnBatt_paramcollector)(char *data, int column, int usage_type);
-typedef int (*pfnMsg_Hndlr)(const char *data);
+typedef int (*pfnMsg_Hndlr)(send_type_en send_type , const char *data);
 
 
 typedef struct

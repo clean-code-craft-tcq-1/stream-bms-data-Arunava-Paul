@@ -14,7 +14,7 @@ int CSV_Handler(void)
 	if(first_cycle == TRUE)
 	{
 		first_cycle = FALSE ; 
-		fp	= fopen("database.txt","r");
+		fp	= fopen("Sender_C/database.txt","r");
 		if(!fp)
 		{
 			Retval = NOT_OK;

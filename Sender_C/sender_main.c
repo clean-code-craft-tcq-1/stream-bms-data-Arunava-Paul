@@ -66,7 +66,7 @@ int sender_main(void)
 int Fc_counter_elapsed(clock_t timestamp_previous)
 {
 	clock_t timestamp_current = clock();
-	if( Fc_time_difference(timestamp_previous , timestamp_current) >= 1000 )
+	if( Fc_time_difference(timestamp_previous , timestamp_current) >= 200 )
 		return TRUE;
 	else
 		return FALSE;

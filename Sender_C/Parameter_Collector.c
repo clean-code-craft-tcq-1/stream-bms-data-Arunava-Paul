@@ -1,11 +1,13 @@
 #include "Common_header.h"
 #include "Parameter_Collector.h"
 
+/*Making Global since the address is shared acreoos multiple files*/
+char out_buffer[1024] ;
 
 char * batt_param_collector(char *param_val , int col , int usage)
 {	
 	int i = 0 ,idx = 0;
-	char out_buffer[1024] , Accu_buffer[50];
+	char Accu_buffer[50];
 	const char colon[2] = ":" , space[3]= "  ";
 	static batt_param_st batt_param[MAX_PARAM_TYPE] = {{temperature_param , "0.00" , "Battery_Temperature"} , 	\
 													{SOC_param , "0.00" , "Battery_SOC"} , 					\

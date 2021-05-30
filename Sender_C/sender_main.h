@@ -2,13 +2,20 @@
 #define SENDER_MAIN_H
 
 
-float string2float(char *str);
+
+int Fc_counter_elapsed(clock_t timestamp_previous);
+int Fc_time_difference(clock_t timestamp_previous , clock_t timestamp_current);
 extern int CSV_Handler(void);
+int sender_main(void);
 extern char * batt_param_collector(char *param_val , int col , int usage);
 extern int Msg_Handler(send_type_en passed_send_type , const char *disp_msg);
 
 #define NOT_OK 0
 #define OK		1
+
+#define MILISECOND_VALUE(a) (a *1000 / CLOCKS_PER_SEC)
+#define MAX_CLOCK_CYCLE_TIME 0xFFFFFFFF /*Arbitrary number. Since not original controller system counter max value not known*/
+#define PROCESS_TERMINATE 9
 
 typedef int (*pfnCSVhandler)(void);
 typedef char* (*pfnBatt_paramcollector)(char *data, int column, int usage_type);
@@ -23,6 +30,6 @@ typedef struct
 
 }Sender_st;
 
-void sender_main(void);
+
 
 #endif

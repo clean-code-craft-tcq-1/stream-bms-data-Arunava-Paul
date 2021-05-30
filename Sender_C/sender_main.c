@@ -5,7 +5,7 @@
 
 
 
-void main()
+int main()
 {
 	clock_t timestamp_start;
 	timestamp_start = clock();
@@ -21,6 +21,7 @@ void main()
 			};
 		}
 	}
+	return 0;
 }
 
 int sender_main(void)

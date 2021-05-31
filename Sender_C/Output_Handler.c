@@ -4,8 +4,13 @@
 
 int Msg_Handler(send_type_en passed_send_type ,const char *disp_msg)
 {
+	int ret = NOT_OK;
 	Send_method_st Send_method[1] = {{send_to_console , send2console}};
-	return Send_method[passed_send_type].fn_send2UI(disp_msg);
+	if((Send_method[passed_send_type].fn_send2UI != NULL) && (passed_send_type < MAX_send_type))
+	{
+		ret = Send_method[passed_send_type].fn_send2UI(disp_msg);
+	}
+	return ret;
 }
 
 #if(TEST_CODE_ACTIVE != TRUE)

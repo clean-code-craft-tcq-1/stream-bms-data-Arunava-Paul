@@ -14,7 +14,7 @@ char * batt_param_collector(char *param_val , int col , int usage)
 													{current_param , "0.00" , "Battery_Current"} , 			\
 													{charge_rate_param , "0.00" , "Battery_Charge_Rate"}};
 	
-	if(usage == UPDATE)
+		if((usage == UPDATE) && (col < MAX_PARAM_TYPE) && (param_val != NULL))
 	{
 		strcpy(batt_param[col].batt_param_val , param_val);
 	}
@@ -33,3 +33,15 @@ char * batt_param_collector(char *param_val , int col , int usage)
 	}	
 	return out_buffer;
 }
+
+#if(TEST_CODE_ACTIVE == TRUE)
+/*************test code********************/
+
+int Test_BattParamColl(char *val , int col , int usage)
+{
+	(void)batt_param_collector(val , col , usage);
+	return OK; // any error condition code will go to exception
+}
+
+/****************************************/
+#endif

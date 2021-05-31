@@ -8,8 +8,45 @@ int Msg_Handler(send_type_en passed_send_type ,const char *disp_msg)
 	return Send_method[passed_send_type].fn_send2UI(disp_msg);
 }
 
+#if(TEST_CODE_ACTIVE != TRUE)
 int send2console(const char *msg)
 {
-	printf("%s" ,msg);
+	printf("%s\n" ,msg);
 	return OK;
 }
+
+#else
+/***********Test code*************/
+
+int Test_OpHdlr_positive_trigger(void)
+{
+	const char msg[128] = "This is a test message";
+	Msg_Handler(send_to_console , msg);
+	//pipe way..
+}
+
+int Test_OpHdlr_negetive_trigger(void)
+{
+	const char msg[128] = "This is a test message";
+	if(Msg_Handler(6 , msg) == NOT_OK) // passing garbage value
+	{
+		return OK;
+	}
+}
+
+int send2console(const char *msg)
+{
+	const char exp_msg[128] = "This is a test message";
+	if(strcmp(msg , exp_msg) == 0)
+	{
+		return OK;
+	}
+	else
+	{
+		return NOT_OK;
+	}
+}
+
+/************************************/
+
+#endif

@@ -7,6 +7,7 @@
 
 int main()
 {
+#if(TEST_CODE_ACTIVE != TRUE)
 	clock_t timestamp_start;
 	timestamp_start = clock();
 	sender_main();
@@ -18,9 +19,42 @@ int main()
 			if(sender_main() == PROCESS_TERMINATE)
 			{
 				break;
-			};
+			}
 		}
 	}
+#else
+	int return_val[5] , i ,j = 0;
+	return_val[0] = Test_OpHdlr_positive_trigger();
+	return_val[1] = Test_OpHdlr_negetive_trigger();
+	return_val[2] = Test_BattParamColl(0,565 , 89);
+	return_val[3] = Test_BattParamColl(0,565 , UPDATE);
+	return_val[4] = Test_BattParamColl(0,565 , ACCUMULATE);
+	for(i = 0 ; i < 5 ; i++)
+	{
+		if(return_val[i] == NOT_OK)
+		{
+			j= 1;
+		}
+	}
+	if(j ==0)
+	{
+		printf("all case passed\n");
+	}
+	else
+	{
+		printf("test failed");
+	}
+	if(Test_CSV_HandlerNoFile() == OK)
+	{
+		printf("No file handling correct\n");
+	}
+	if(Test_CSV_HandlerEndFile() == OK)
+	{
+		printf("Empty/ End of file handling correct");
+	}
+
+	getchar();
+#endif
 	return 0;
 }
 

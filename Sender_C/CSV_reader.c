@@ -50,3 +50,31 @@ int CSV_Handler(void)
 	}	
 	return Retval;
 }
+
+#if(TEST_CODE_ACTIVE == TRUE)
+
+/************Test code******************/
+
+int Test_CSV_HandlerNoFile(void)
+{
+	/*Whitebox testing*/
+	/*Not present file*/
+	if(CSV_Handler() == NOT_OK)
+	{
+		return OK;
+	}
+}
+
+int Test_CSV_HandlerEndFile(void)
+{
+	/*Whitebox testing*/
+	/*Empty file file*/
+	if(CSV_Handler() == FILE_END_OK)
+	{
+		return OK;
+	}
+}
+
+/****************************************/
+
+#endif

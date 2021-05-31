@@ -13,6 +13,7 @@
 
 #define UPDATE 0
 #define ACCUMULATE 1
+#define GAP_BETWEEN_2_DATA_STREAM_IN_MS 200
 
 #define TEST_CODE_ACTIVE  FALSE
 

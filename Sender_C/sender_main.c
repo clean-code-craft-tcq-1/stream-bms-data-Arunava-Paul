@@ -101,7 +101,7 @@ int sender_main(void)
 int Fc_counter_elapsed(clock_t timestamp_previous)
 {
 	clock_t timestamp_current = clock();
-	if( Fc_time_difference(timestamp_previous , timestamp_current) >= 200 )
+	if( Fc_time_difference(timestamp_previous , timestamp_current) >= GAP_BETWEEN_2_DATA_STREAM_IN_MS )
 		return TRUE;
 	else
 		return FALSE;

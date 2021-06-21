@@ -86,7 +86,7 @@ int main()
     int EoFDetected =0;
   do
     {
-		EoFDetected = 1
+    EoFDetected = GetParamDataString(str,MAXLENGTH_INPUTSTRING);
     if(fgets(str,MAXLENGTH_INPUTSTRING, stdin)==NULL)
            {
                strcpy(str,"EoF detected");

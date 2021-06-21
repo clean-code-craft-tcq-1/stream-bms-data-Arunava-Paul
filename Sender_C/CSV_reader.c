@@ -31,7 +31,7 @@ int CSV_Handler(void)
 				if(!strcmp(data, " "))
 				{
 					//Data capturing problem
-					data = "ERROR" ; 
+					//data = "ERROR" ;    //debug
 				}
 				(void)data_collector(data , col);
 				col++;

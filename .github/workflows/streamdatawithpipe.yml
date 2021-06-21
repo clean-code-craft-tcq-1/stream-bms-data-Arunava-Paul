@@ -11,12 +11,12 @@ jobs:
     - uses: actions/checkout@v2
     
     - name: build
-      run: g++ -Wall -Wextra -fprofile-arcs -ftest-coverage -o testchecker ./Sender_C/*.c*   
+      run: g++ -Wall -Wextra -fprofile-arcs -ftest-coverage -o testchecker ./Sender_C/Parameter_Collector.c     
       
     - name: Build receiver for pipe
       run: gcc -DMAIN -Wall -Wextra -fprofile-arcs -ftest-coverage -o testchecker1 ./Receiver_C/*.c
       
     - name : testchecker | testchecker1
       run: |
-         g++ -Wall -Wextra -fprofile-arcs -ftest-coverage -o testchecker ./Sender_C/*.c*   
+         g++ -Wall -Wextra -fprofile-arcs -ftest-coverage -o testchecker ./Sender_C/Parameter_Collector.c  
          gcc -DMAIN -Wall -Wextra -fprofile-arcs -ftest-coverage -o testchecker1 ./Receiver_C/*.c

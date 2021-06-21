@@ -76,6 +76,6 @@ int main()
            {
                float BMSParamValueRxd[NUMOFPARAM] = {0};
                BMSParamValueRxd[i] = getParamValuefromConsoleCustom(str,(enum BATTERYPARAM)i);
-               printf("%f", BMSParamValueRxd[i]);
+               printf("\n%f", BMSParamValueRxd[i]);
            }
 }

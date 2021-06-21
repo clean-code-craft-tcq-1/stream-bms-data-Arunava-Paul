@@ -126,7 +126,7 @@ int main()
 //     }while(!(EoFDetected == 1));
 	
 	 delay(1);
-	 while (fgets(rv_data, 500, stdin))
+	 while (fgets(rv_data, 1024, stdin))
        {
 	delay(1);	
 	printf("%s",rv_data);

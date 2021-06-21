@@ -93,27 +93,32 @@ int main()
 //    p = str;
 //   float value = getParamValuefromConsoleCustom(p,CHARGERATE);
 //    printf("%f",value);
-    char str[MAXLENGTH_INPUTSTRING];
-    int EoFDetected =0;
-  do
-    {
-    EoFDetected = GetParamDataString(str,MAXLENGTH_INPUTSTRING);
-	 // if(gets(str)==NULL)
-	// while((int ch = getchar()) != '\n' && ch != EOF);
-        if(fgets(str,MAXLENGTH_INPUTSTRING, stdin)==NULL)
-           {
-		printf("%d\n",ferror(stdin));
-             //  strcpy(str,"EoF detected");
-               printf("EoF detected, stopping reception\n");
-              EoFDetected  = 1;
-           }
+    char str[1024];
+//     int EoFDetected =0;
+//   do
+//     {
+//     EoFDetected = GetParamDataString(str,MAXLENGTH_INPUTSTRING);
+// 	 // if(gets(str)==NULL)
+// 	// while((int ch = getchar()) != '\n' && ch != EOF);
+//         if(fgets(str,MAXLENGTH_INPUTSTRING, stdin)==NULL)
+//            {
+// 		printf("%d\n",ferror(stdin));
+//              //  strcpy(str,"EoF detected");
+//                printf("EoF detected, stopping reception\n");
+//               EoFDetected  = 1;
+//            }
          
           
-           for (int i=0 ; i < NUMOFPARAM; i++)
-           {
-               float BMSParamValueRxd[NUMOFPARAM] = {0};
-               BMSParamValueRxd[i] = getParamValuefromConsoleCustom(str,(TEMPERATURE));
-               printf("\n%f", BMSParamValueRxd[i]);
-           }
-    }while(!(EoFDetected == 1));
+//            for (int i=0 ; i < NUMOFPARAM; i++)
+//            {
+//                float BMSParamValueRxd[NUMOFPARAM] = {0};
+//                BMSParamValueRxd[i] = getParamValuefromConsoleCustom(str,(TEMPERATURE));
+//                printf("\n%f", BMSParamValueRxd[i]);
+//            }
+//     }while(!(EoFDetected == 1));
+	for (int i=0 ; i < 10; i++)
+	{
+		fgets(str,MAXLENGTH_INPUTSTRING, stdin);
+		printf("%s\n",str);
+	}
 }

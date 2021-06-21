@@ -92,7 +92,8 @@ int main()
   do
     {
     EoFDetected = GetParamDataString(str,MAXLENGTH_INPUTSTRING);
-    if(fgets(str,MAXLENGTH_INPUTSTRING, stdin)==NULL)
+	  if(gets(str)==NULL)
+    //if(fgets(str,MAXLENGTH_INPUTSTRING, stdin)==NULL)
            {
                strcpy(str,"EoF detected");
                printf("EoF detected, stopping reception\n");

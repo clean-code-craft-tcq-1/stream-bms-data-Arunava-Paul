@@ -9,6 +9,21 @@ struct BatteryParam_s BatteryParam[NUMOFPARAM] =
 {"Battery_Charge_Rate",CURRENT_MIN, CURRENT_MAX}
 };
 
+int GetParamDataString(char *appendStr, int stringSize)
+{
+	int EoFDetected = 0;
+	
+	/*Released only for console, if in future, it is from file, it can be adapted here*/
+	if(fgets(appendStr,stringSize,stdin)== NULL)
+	{
+		strcpy(appendStr,"EoF detected");
+		printf("EoF detected, stopping reception\n");
+	    EoFDetected  = 1;
+	}
+	
+	return EoFDetected;
+}
+
 float getParamValuefromConsoleCustom(char *scanLine, enum BATTERYPARAM batteryParam)
 {
   char splitStr[NUMOFPARAM*4][20]={'\0'};
@@ -69,11 +84,14 @@ int main()
 //    printf("%f",value);
     char str[MAXLENGTH_INPUTSTRING];
     int EoFDetected =0;
+  do
+    {
+		EoFDetected = 1
     if(fgets(str,MAXLENGTH_INPUTSTRING, stdin)==NULL)
            {
                strcpy(str,"EoF detected");
                printf("EoF detected, stopping reception\n");
-              // EoFDetected  = 1;
+              EoFDetected  = 1;
            }
          
           
@@ -83,4 +101,5 @@ int main()
                BMSParamValueRxd[i] = getParamValuefromConsoleCustom(str,(TEMPERATURE));
                printf("\n%f", BMSParamValueRxd[i]);
            }
+    }while(!(EoFDetected == 1));
 }

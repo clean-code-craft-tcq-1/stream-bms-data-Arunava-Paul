@@ -31,8 +31,10 @@ float getParamValuefromConsoleCustom(char *scanLine, enum BATTERYPARAM batteryPa
   int k=0;
   float temp;
   char buffer[MAXLENGTH_INPUTSTRING];
-  
-  strcpy(buffer,scanLine);
+   str[1024] = "Battery_Temperature:54.5  Battery_SOC:0.4  Battery_Current:10  Battery_Charge_Rate:0.12";
+ char *p;
+   p = str;
+  strcpy(buffer,p);
  printf("\npch is null0=%s",scanLine);//DEBUG
  pch = strtok (buffer," :\t");
  printf("\npch is null0=%s",pch); //DEBUG

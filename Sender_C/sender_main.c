@@ -76,12 +76,12 @@ int sender_main(void)
 	}		
 	else if(Retval == NOT_OK)
 	{
-		//disp_msg  = "CSV file read error" ;  //debug
+		disp_msg  = "CSV file read error" ;  
 		doTerminate = TRUE;
 	}
 	else if(Retval == FILE_END_OK)
 	{
-		//disp_msg  = "CSV file end" ;  //debug
+		disp_msg  = "CSV file end" ;  
 		doTerminate = TRUE;
 	}
 	/*-----------------------------------------*/

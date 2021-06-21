@@ -14,10 +14,11 @@ int GetParamDataString(char *appendStr, int stringSize)
 	int EoFDetected = 0;
 	
 	/*Released only for console, if in future, it is from file, it can be adapted here*/
-	if(fgets(appendStr,stringSize,stdin)!= NULL)
+	while ((int ch = getchar()) != '\n' && ch != EOF);
+	if(fgets(appendStr,stringSize,stdin)== NULL)
 	{
 		//strcpy(appendStr,"EoF detected");
-		printf("EoF detected, stopping reception\n");
+		printf("EoF detectedstatus, stopping reception\n");
 	    EoFDetected  = 1;
 	}
 	
@@ -93,6 +94,7 @@ int main()
     {
     EoFDetected = GetParamDataString(str,MAXLENGTH_INPUTSTRING);
 	 // if(gets(str)==NULL)
+	 while ((int ch = getchar()) != '\n' && ch != EOF);
         if(fgets(str,MAXLENGTH_INPUTSTRING, stdin)!=NULL)
            {
 		printf("%d\n",ferror(stdin));

@@ -63,7 +63,7 @@ int main()
 //   float value = getParamValuefromConsoleCustom(p,CHARGERATE);
 //    printf("%f",value);
     char str[MAXLENGTH_INPUTSTRING];
-  
+    int EoFDetected =0;
     if(fgets(str,MAXLENGTH_INPUTSTRING, stdin)==NULL)
            {
                strcpy(str,"EoF detected");
@@ -71,11 +71,11 @@ int main()
               // EoFDetected  = 1;
            }
          
-          
+          else
            for (int i=0 ; i < NUMOFPARAM; i++)
            {
                float BMSParamValueRxd[NUMOFPARAM] = {0};
-               BMSParamValueRxd[i] = getParamValuefromConsoleCustom(str,(enum BATTERYPARAM)i);
+               BMSParamValueRxd[i] = getParamValuefromConsoleCustom(str,(TEMPERATURE)i);
                printf("\n%f", BMSParamValueRxd[i]);
            }
 }

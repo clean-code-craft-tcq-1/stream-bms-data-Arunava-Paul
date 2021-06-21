@@ -33,7 +33,8 @@ float getParamValuefromConsoleCustom(char *scanLine, enum BATTERYPARAM batteryPa
   char buffer[MAXLENGTH_INPUTSTRING];
   
   strcpy(buffer,scanLine);
-  pch = strtok(buffer," ");
+ pch = strtok (buffer," :\t");
+ printf("\npch is null0=%s",pch);
   
   if(pch == NULL)
   {

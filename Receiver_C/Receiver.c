@@ -26,7 +26,7 @@ int GetParamDataString(char *appendStr, int stringSize)
 
 float getParamValuefromConsoleCustom(char *scanLine, enum BATTERYPARAM batteryParam)
 {
-  char splitStr[NUMOFPARAM*4][20]={'\0'};
+  char splitStr[NUMOFPARAM*4][10]={'\0'};
   char * pch;
   int k=0;
   float temp;

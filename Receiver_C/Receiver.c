@@ -1,5 +1,6 @@
 
 #include "Receiver.h"
+#include "time.h"
 //#include "conio.h"
 
 /* Structure initialisation of battery parameters */
@@ -86,6 +87,13 @@ float getParamValuefromConsoleCustom(char *scanLine, enum BATTERYPARAM batteryPa
   return temp;
 }
 
+void delay(int number_of_seconds)
+	{
+		int milli_seconds=1000*number_of_seconds;
+		clock_t start_time =clock();
+		while(clock() < start_time+milli_seconds)
+	}
+
 int main()
 {
 //        char str[1024] = "Battery_Temperature:54.5  Battery_SOC:0.4  Battery_Current:10  Battery_Charge_Rate:0.12";
@@ -116,8 +124,11 @@ int main()
 //                printf("\n%f", BMSParamValueRxd[i]);
 //            }
 //     }while(!(EoFDetected == 1));
+	
+	 delay(1);
 	 while (fgets(rv_data, 500, stdin))
        {
+	delay(1);	
 	printf("%s",rv_data);
 	}
 }

@@ -20,7 +20,7 @@ jobs:
       run: ./sender_test
   
     - name: build for test receiver
-      run: g++ -DUNIT_TEST -Wall -Wextra -fprofile-arcs -ftest-coverage -o receiver_test Receiver_C/*.c* 
+      run: g++ -DUNIT_TEST -Wall -Wextra -fprofile-arcs -ftest-coverage -o receiver_test -IReceiver_C/*.c* 
       
     - name: run
       run: ./receiver_test
@@ -39,7 +39,7 @@ jobs:
       run: g++ -Wall -Wextra -o sender Sender_C/*.c*
     
     - name: build for production receiver
-      run: g++ -Wall -Wextra -o receiver Receiver_C/*.c* 
+      run: g++ -Wall -Wextra -o receiver -IReceiver_C/*.c* 
       
     - name: production code run
       run: ./sender | ./receiver

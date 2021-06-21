@@ -20,7 +20,7 @@ jobs:
       run: ./sender_test
 
    - name: build for test receiver
-      run: g++ -Wall -Wextra -fprofile-arcs -ftest-coverage -o receiver_test Receiver_C/*.c*
+      run: g++ -Wall -Wextra -fprofile-arcs -ftest-coverage -o receiver_test -IReceiver_C/Receiver.c
       
     - name: run
       run: ./receiver_test

@@ -15,7 +15,7 @@ int GetParamDataString(char *appendStr, int stringSize)
 	int EoFDetected = 0;
 	
 	/*Released only for console, if in future, it is from file, it can be adapted here*/
-	(int ch = getchar());
+	char ch = getchar();
 	printf("ch = %c",ch);
 	//while( ch!= '\n' && ch != EOF);
 	if(fgets(appendStr,stringSize,stdin)== NULL)

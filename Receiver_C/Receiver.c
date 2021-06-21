@@ -93,7 +93,7 @@ int main()
 //    p = str;
 //   float value = getParamValuefromConsoleCustom(p,CHARGERATE);
 //    printf("%f",value);
-    char str[1024];
+    char rv_data[1024];
 //     int EoFDetected =0;
 //   do
 //     {
@@ -116,9 +116,8 @@ int main()
 //                printf("\n%f", BMSParamValueRxd[i]);
 //            }
 //     }while(!(EoFDetected == 1));
-	for (int i=0 ; i < 10; i++)
-	{
-		fgets(str,MAXLENGTH_INPUTSTRING, stdin);
-		printf("%s\n",str);
+	 while (fgets(rv_data, 500, stdin))
+       {
+	printf("%s",rv_data);
 	}
 }

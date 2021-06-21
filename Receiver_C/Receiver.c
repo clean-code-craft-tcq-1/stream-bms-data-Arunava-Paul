@@ -16,7 +16,7 @@ int GetParamDataString(char *appendStr, int stringSize)
 	/*Released only for console, if in future, it is from file, it can be adapted here*/
 	if(fgets(appendStr,stringSize,stdin)== NULL)
 	{
-		strcpy(appendStr,"EoF detected");
+		//strcpy(appendStr,"EoF detected");
 		printf("EoF detected, stopping reception\n");
 	    EoFDetected  = 1;
 	}
@@ -33,7 +33,7 @@ float getParamValuefromConsoleCustom(char *scanLine, enum BATTERYPARAM batteryPa
   char buffer[MAXLENGTH_INPUTSTRING];
   
   strcpy(buffer,scanLine);
-  pch = strtok(buffer," :\t");
+  pch = strtok(buffer," ");
   
   if(pch == NULL)
   {
@@ -89,7 +89,7 @@ int main()
     EoFDetected = GetParamDataString(str,MAXLENGTH_INPUTSTRING);
     if(fgets(str,MAXLENGTH_INPUTSTRING, stdin)==NULL)
            {
-               strcpy(str,"EoF detected");
+               //strcpy(str,"EoF detected");
                printf("EoF detected, stopping reception\n");
               EoFDetected  = 1;
            }

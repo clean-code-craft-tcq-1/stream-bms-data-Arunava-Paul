@@ -71,7 +71,7 @@ int main()
               // EoFDetected  = 1;
            }
          
-          else
+          
            for (int i=0 ; i < NUMOFPARAM; i++)
            {
                float BMSParamValueRxd[NUMOFPARAM] = {0};

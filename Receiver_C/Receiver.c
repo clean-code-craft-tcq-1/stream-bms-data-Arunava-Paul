@@ -75,7 +75,7 @@ int main()
            for (int i=0 ; i < NUMOFPARAM; i++)
            {
                float BMSParamValueRxd[NUMOFPARAM] = {0};
-               BMSParamValueRxd[i] = getParamValuefromConsoleCustom(str,(TEMPERATURE)i);
+               BMSParamValueRxd[i] = getParamValuefromConsoleCustom(str,(TEMPERATURE));
                printf("\n%f", BMSParamValueRxd[i]);
            }
 }

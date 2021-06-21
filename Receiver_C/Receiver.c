@@ -56,10 +56,10 @@ float getParamValuefromConsoleCustom(char *scanLine, enum BATTERYPARAM batteryPa
 }
 
 int main(){
-//        char ip[1024] = "Battery_Temperature:54.5  Battery_SOC:0.4  Battery_Current:10  Battery_Charge_Rate:0.12";
-//   char *p;
-//    p = ip;
-//   float value = getParamValuefromConsoleCustom(p,CHARGERATE);
-//    printf("%f",value);
+       char ip[1024] = "Battery_Temperature:54.5  Battery_SOC:0.4  Battery_Current:10  Battery_Charge_Rate:0.12";
+  char *p;
+   p = ip;
+  float value = getParamValuefromConsoleCustom(p,CHARGERATE);
+   printf("%f",value);
     
 }

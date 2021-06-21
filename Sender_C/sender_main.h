@@ -13,7 +13,7 @@ extern int Msg_Handler(send_type_en passed_send_type , const char *disp_msg);
 #define NOT_OK 0
 #define OK		1
 
-#define MILISECOND_VALUE(a) (a *1000 / CLOCKS_PER_SEC)
+#define MILISECOND_VALUE(a) (a *0 / CLOCKS_PER_SEC)
 #define MAX_CLOCK_CYCLE_TIME 0xFFFFFFFF /*Arbitrary number. Since not original controller system counter max value not known*/
 #define PROCESS_TERMINATE 9
 

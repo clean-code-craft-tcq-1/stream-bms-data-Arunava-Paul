@@ -55,11 +55,27 @@ float getParamValuefromConsoleCustom(char *scanLine, enum BATTERYPARAM batteryPa
   return temp;
 }
 
-int main(){
-       char ip[1024] = "Battery_Temperature:54.5  Battery_SOC:0.4  Battery_Current:10  Battery_Charge_Rate:0.12";
-  char *p;
-   p = ip;
-  float value = getParamValuefromConsoleCustom(p,CHARGERATE);
-   printf("%f",value);
-    
+int main()
+{
+//        char str[1024] = "Battery_Temperature:54.5  Battery_SOC:0.4  Battery_Current:10  Battery_Charge_Rate:0.12";
+//   char *p;
+//    p = str;
+//   float value = getParamValuefromConsoleCustom(p,CHARGERATE);
+//    printf("%f",value);
+    char str[MAXLENGTH_INPUTSTRING];
+  
+    if(fgets(str,MAXLENGTH_INPUTSTRING, stdin)==NULL)
+           {
+               strcpy(str,"EoF detected");
+               printf("EoF detected, stopping reception\n");
+              // EoFDetected  = 1;
+           }
+         
+          
+           for (int i=0 ; i < NUMOFPARAM; i++)
+           {
+               float BMSParamValueRxd[NUMOFPARAM] = {0};
+               BMSParamValueRxd[i] = getParamValuefromConsoleCustom(str,(enum BATTERYPARAM)i);
+               printf("%f", BMSParamValueRxd[i]);
+           }
 }

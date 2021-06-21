@@ -1,5 +1,6 @@
 
 #include "Receiver.h"
+//#include "conio.h"
 
 /* Structure initialisation of battery parameters */
 struct BatteryParam_s BatteryParam[NUMOFPARAM] =
@@ -14,7 +15,9 @@ int GetParamDataString(char *appendStr, int stringSize)
 	int EoFDetected = 0;
 	
 	/*Released only for console, if in future, it is from file, it can be adapted here*/
-	while((int ch = getchar()) != '\n' && ch != EOF);
+	(int ch = getchar());
+	printf("ch = %c",ch);
+	//while( ch!= '\n' && ch != EOF);
 	if(fgets(appendStr,stringSize,stdin)== NULL)
 	{
 		//strcpy(appendStr,"EoF detected");
@@ -94,7 +97,7 @@ int main()
     {
     EoFDetected = GetParamDataString(str,MAXLENGTH_INPUTSTRING);
 	 // if(gets(str)==NULL)
-	 while((int ch = getchar()) != '\n' && ch != EOF);
+	// while((int ch = getchar()) != '\n' && ch != EOF);
         if(fgets(str,MAXLENGTH_INPUTSTRING, stdin)==NULL)
            {
 		printf("%d\n",ferror(stdin));

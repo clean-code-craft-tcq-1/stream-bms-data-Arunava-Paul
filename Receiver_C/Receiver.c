@@ -95,7 +95,7 @@ int main()
     EoFDetected = GetParamDataString(str,MAXLENGTH_INPUTSTRING);
 	 // if(gets(str)==NULL)
 	 while ((int ch = getchar()) != '\n' && ch != EOF);
-        if(fgets(str,MAXLENGTH_INPUTSTRING, stdin)!=NULL)
+        if(fgets(str,MAXLENGTH_INPUTSTRING, stdin)==NULL)
            {
 		printf("%d\n",ferror(stdin));
              //  strcpy(str,"EoF detected");

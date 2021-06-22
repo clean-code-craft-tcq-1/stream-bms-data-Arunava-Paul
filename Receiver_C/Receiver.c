@@ -193,10 +193,10 @@ void RxCalculate_FromBMSParam()
             printf("Max Temperature:%f, Battery_SOC:%f,Current:%f, Charge_Rate:%f\n",BatteryParamEvaluated[0].maxRx,BatteryParamEvaluated[1].maxRx,BatteryParamEvaluated[2].maxRx,BatteryParamEvaluated[3].maxRx);
 }
  
-//#ifdef MAIN
+#ifdef MAIN
 int main()
 {
     RxCalculate_FromBMSParam();
    return 0;
 }
-//#endif
+#endif

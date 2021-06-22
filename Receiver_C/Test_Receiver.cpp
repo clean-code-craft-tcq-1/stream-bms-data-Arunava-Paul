@@ -27,16 +27,7 @@ TEST_CASE("Test case to test the Maximum Value in an array")
   REQUIRE(MaximumValue == actualMaxValue);
 }
 
-// TEST_CASE("Test case to test the Maximum Value in an array with negative values")
-// {
-  
-//   float AttributeArray[]={10,20,30,40,10,-20};
-//   float actualMaxValue= 40;
-//   float MaximumValue=0;
-//   int ArraySize= sizeof(AttributeArray)/sizeof(AttributeArray[0]);
-//   Calculate_MaxParameterValue(AttributeArray, ArraySize, &MaximumValue);
-//   REQUIRE(MaximumValue == actualMaxValue);
-// }
+
 
 TEST_CASE("Test case to test the Minimum Value in an array")
 {
@@ -49,16 +40,7 @@ TEST_CASE("Test case to test the Minimum Value in an array")
   REQUIRE(MinimumValue == actualMinValue);
 }
 
-// TEST_CASE("Test case to test the Minimum Value in an array with negative values")
-// {
-  
-//   float AttributeArray[]={10,20,30,40,10,5,2,8,-20,-18};
-//   float actualMinValue= -20;
-//   float MinimumValue=-10;
-//   int ArraySize= sizeof(AttributeArray)/sizeof(AttributeArray[0]);
-//   Calculate_MinParameterValue(AttributeArray, ArraySize, &MinimumValue);
-//   REQUIRE(MinimumValue == actualMinValue);
-// }
+
 
 TEST_CASE("Test case to test the Simple Moving Average")
 {

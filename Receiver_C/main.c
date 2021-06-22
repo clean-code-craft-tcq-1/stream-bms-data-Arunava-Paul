@@ -1,8 +1,8 @@
 
-#include "Receiver.h"
+// #include "Receiver.h"
 
-int main()
-{
-	  BMS_ReadfromConsole();
-	return 0;
-}
+// int main()
+// {
+// 	  BMS_ReadfromConsole();
+// 	return 0;
+// }

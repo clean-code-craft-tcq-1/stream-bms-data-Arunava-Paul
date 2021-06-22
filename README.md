@@ -57,15 +57,15 @@ This section lists the minimum functionality of the Sender and Receiver.
 
 ### The Sender
 
-- sends at least two Battery / Charging parameters -BMS Temperature and State-Of-Charge
+- sends at least two Battery / Charging parameters -BMS Temperature, State-Of-Charge,BMS Current and Charge Rate
 - sends these parameters in a stream (keeps sending automatically till the user stops)
 - Sender reads from a CSV file
 - uses console output to communicate the parameters.
 
 ### The Receiver
 
-- reads the parameters from the Rx file
-- after reading every parameter, it prints the following:
+- reads the parameters from the Rx file -BMS Temperature, State-Of-Charge,BMS Current and Charge Rate
+- after reading every parameter, it prints the following:(Here reading input stream is from Rx file, replicated same as console output from sender)
     - maximum and minimum values in the incoming stream
     - [simple moving average](https://www.investopedia.com/terms/s/sma.asp) of the last 5 values
 

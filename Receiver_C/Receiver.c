@@ -1,134 +1,201 @@
+**********************************************
+Include header files
+***********************************************/
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include "bms_receiver.h"
 
-#include "Receiver.h"
-#include "time.h"
-//#include "conio.h"
+/***********************************************************************************************************************
+Variable declaration
+**************************************************************************************************************************/
+float MinimumAttributeValueArray[NumberOfAttributes]= {100,100};
+float MaximumAttributeValueArray[NumberOfAttributes]= {0,0};
+float Temperature[Max_ArraySize]={};
+float SoC[Max_ArraySize]={};
+int NoOfEntery=0;
 
-/* Structure initialisation of battery parameters */
-struct BatteryParam_s BatteryParam[NUMOFPARAM] =
-{{"Battery_Temperature", TEMP_MIN , TEMP_MAX},
-{"Battery_SOC", CHRGRATE_MIN , CHRGRATE_MAX},
-{"Battery_Current",CURRENT_MIN, CURRENT_MAX},
-{"Battery_Charge_Rate",CURRENT_MIN, CURRENT_MAX}
-};
+/***************************************************************************************************************************
+Function definitions
+****************************************************************************************************************************/
 
-int GetParamDataString(char *appendStr, int stringSize)
+/**************************************************************************************************************************
+ * Function: BMS_Readfromdatafile
+ * Description: This function reads the BMS parameter readings from the suitable 
+   data log file and stores into a buffer  
+ * input: void
+ * returns: Read status is Success(True) if the data is successfully read from the file.
+ ***************************************************************************************************************************/
+OperationMode BMS_ReadfromConsole()
 {
-	int EoFDetected = 0;
+  FILE *BMS_datafile;
+  int line=1, Index=0;
+  OperationMode ReadStatus= Failure;
+
+  BMS_datafile=fopen("BMS_attributelog.txt", "r");
+  if (BMS_datafile==NULL)
+    {
+      printf("File open attempt failed\n");
+
+    }
 	
-	/*Released only for console, if in future, it is from file, it can be adapted here*/
-	printf("ch=%d\n",feof(stdin));
-// 	int ch = getchar();
-// 	printf("ch = %d\n",ch);
+  else
+    {
+
+	float ReadTemperature=0,ReadSoC=0;
+         printf("File open attempt successful\n");
+
+	      while(line != EOF)
+		{
+		  line=fscanf(BMS_datafile,"%f %f",&ReadTemperature,&ReadSoC);
+		  Temperature[Index]=ReadTemperature;
+		  SoC[Index]=ReadSoC;
+		  Index++;
+		}
+		NoOfEntery= Index;
+		ReadStatus= Success;
+	    }
 	
-	//while( ch!= '\n' && ch != EOF);
-	if(fgets(appendStr,stringSize,stdin)== NULL)
-	{
-		//strcpy(appendStr,"EoF detected");
-		printf("EoF detectedstatus, stopping reception\n");
-	    EoFDetected  = 1;
-	}
-	
-	return EoFDetected;
+	fclose(BMS_datafile);
+	return ReadStatus;
+}
+/***********************************************************************************************************************************
+ * Function: Calculate_TemperatureMinandMaxRange
+ * Description: This function calculates the maximum and minimum range of temperature in a given
+                data array.
+ * input: The number of data values available.	  
+ * returns: NULL, it prints the minimum and maximum value on the console
+ ***********************************************************************************************************************************/
+
+void Calculate_TemperatureMinandMaxRange(int NoOfEnteries)
+{
+ Calculate_MinParameterValue(Temperature, NoOfEnteries, &MinimumAttributeValueArray[0]);
+ Calculate_MaxParameterValue(Temperature, NoOfEnteries, &MaximumAttributeValueArray[0]);
+ printf("Minimum and Maximum Temperature in the given range is %0.2f F and %0.2f F respectively\n",MinimumAttributeValueArray[0],MaximumAttributeValueArray[0]);
 }
 
-float getParamValuefromConsoleCustom(char *scanLine, enum BATTERYPARAM batteryParam)
+
+/**********************************************************************************************************************************
+ * Function: Calculate_StateOfChargeMinandMaxRange
+ * Description: This function calculates the maximum and minimum range of SoC (State-Of-Charge) in a given
+                data array. 
+ * input: The number of data values available.  
+ * returns: NULL, it prints the minimum and maximum value on the console
+ **********************************************************************************************************************************/
+void Calculate_SoCMinandMaxRange(int NoOfEnteries)
 {
-  char splitStr[NUMOFPARAM*4][10]={'\0'};
-  char * pch;
-  int k=0;
-  float temp;
-  char buffer[MAXLENGTH_INPUTSTRING];
-//   char str[1024] = "Battery_Temperature:54.5  Battery_SOC:0.4  Battery_Current:10  Battery_Charge_Rate:0.12";
-//  char *p;
-//    p = str;
-  strcpy(buffer,scanLine);
- printf("\npch is null0=%s",scanLine);//DEBUG
- pch = strtok (buffer," :\t");
- printf("\npch is null0=%s",pch); //DEBUG
-	
   
-  if(pch == NULL)
-  {
-  printf("\npch is null=%s",pch); //DEBUG
-  }
-  
-  while (pch != NULL)
-  {
-    
-    strcpy((splitStr[k]),pch);
-      printf("\n%s",splitStr[k]); //debug
-    k++;
-    pch = strtok (NULL, " :\t");
-  }
-  
-  for(int j=0; j < (NUMOFPARAM*4);j=j+2)
-  {
-        
-      if(strcmp((splitStr[j]),BatteryParam[batteryParam].ParamName) == 0)
-      {
-          if(strcmp((splitStr[j+1]),"ERROR") == 0)
-         {
-          temp = ERROR_VALUE_FROM_RX;
-          }
-        else
+  Calculate_MinParameterValue(SoC, NoOfEnteries, &MinimumAttributeValueArray[1]);
+  Calculate_MaxParameterValue(SoC, NoOfEnteries, &MaximumAttributeValueArray[1]);
+  printf("Minimum and Maximum State-of-Charge in the given range is %0.2f%% and %0.2f%% respectively\n",MinimumAttributeValueArray[1],MaximumAttributeValueArray[1]);
+}
+
+
+/*****************************************************************************************************************************
+ * Function: Calculate_MaxParameterValue
+ * Description: This function calculates the maximum value of an attribute in a given range. 
+ * input: The number of data values available, data values and the threshold/reference value.
+ * returns: The maximum value in the given range
+ ****************************************************************************************************************************/
+ void Calculate_MaxParameterValue(float AttributeValue[], int NoOfEnteries, float *MaximumAttributeValue)
+ {
+   for(int i=0; i< NoOfEnteries; i++)
+   {
+        if(AttributeValue[i] > *MaximumAttributeValue)
         {
-         temp = atof(splitStr[j+1]);
+            *MaximumAttributeValue = AttributeValue[i];
+        }
+   }
+   
+ }
+
+
+/****************************************************************************************************************************
+ * Function: Calculate_MinParameterValue
+ * Description: This function calculates the minimum value of an attribute in a given range. 
+ * input: The number of data values available, data values and the threshold/reference value.	  
+ * returns: The minimum value in the given range
+ ****************************************************************************************************************************/
+void Calculate_MinParameterValue(float AttributeValue[], int NoOfEnteries, float *MinimumAttributeValue)
+ {
+  for(int i=0; i< NoOfEnteries; i++)
+   {
+     
+     if(AttributeValue[i] < *MinimumAttributeValue)
+          {
+              *MinimumAttributeValue = AttributeValue[i];
           }
-         break;
-      }
-      else
-      {
-          temp = VALUE_NOTFOUND;
-      }
-  }
-
-  pch = NULL;
-
-  return temp;
+   }
 }
 
-void delay(int number_of_seconds)
-	{
-		int milli_seconds=1000*number_of_seconds;
-		clock_t start_time =clock();
-		while(clock() < start_time+milli_seconds);
-	}
 
-int main()
+/*********************************************************************************************************************************
+ * Function: Calculate_TemperatureSimpleMovingAverage
+ * Description: This function calculates the average value of Temperature over latest 5 data points.   
+ * input: The number of data values available.	  
+ * returns: The average value of temperature in the given range
+ *********************************************************************************************************************************/
+void Calculate_TemperatureSimpleMovingAverage(int NoOfEnteries)
 {
-//        char str[1024] = "Battery_Temperature:54.5  Battery_SOC:0.4  Battery_Current:10  Battery_Charge_Rate:0.12";
-//   char *p;
-//    p = str;
-//   float value = getParamValuefromConsoleCustom(p,CHARGERATE);
-//    printf("%f",value);
-    char rv_data[1024];
-//     int EoFDetected =0;
-//   do
-//     {
-//     EoFDetected = GetParamDataString(str,MAXLENGTH_INPUTSTRING);
-// 	 // if(gets(str)==NULL)
-// 	// while((int ch = getchar()) != '\n' && ch != EOF);
-//         if(fgets(str,MAXLENGTH_INPUTSTRING, stdin)==NULL)
-//            {
-// 		printf("%d\n",ferror(stdin));
-//              //  strcpy(str,"EoF detected");
-//                printf("EoF detected, stopping reception\n");
-//               EoFDetected  = 1;
-//            }
-         
-          
-//            for (int i=0 ; i < NUMOFPARAM; i++)
-//            {
-//                float BMSParamValueRxd[NUMOFPARAM] = {0};
-//                BMSParamValueRxd[i] = getParamValuefromConsoleCustom(str,(TEMPERATURE));
-//                printf("\n%f", BMSParamValueRxd[i]);
-//            }
-//     }while(!(EoFDetected == 1));
-	
-	 delay(1);
-	scanf("%s\n",rv_data);
-       {
-	delay(1);	
-	printf("%s",rv_data);
-	}
+  float Temperature_SMA= Calculate_SimpleMovingAverage(Temperature, NoOfEnteries);
+  printf("Simple moving average of Temperature is %0.2f F\n",Temperature_SMA);
+}
+
+
+/********************************************************************************************************************************
+ * Function: Calculate_SoCSimpleMovingAverage
+ * Description: This function calculates the average value of SoC over latest 5 data points.
+ * input: The number of data values available	  
+ * returns: The average value of temperature in the given range
+ ******************************************************************************************************************************/
+void Calculate_SoCSimpleMovingAverage(int NoOfEnteries)
+{
+  float SoC_SMA= Calculate_SimpleMovingAverage(SoC, NoOfEnteries);
+  printf("Simple moving average of State-of-Charge is %0.2f%%\n",SoC_SMA);
+}
+
+
+
+/***********************************************************************************************
+ * Function: Calculate_SimpleMovingAverage
+ * Description: This function calculates the average value of an attribute in a over latest 5 data points. 
+ * input: The number of data values available.	  
+ * returns: The average value of attribute in the given range
+ ***********************************************************************************************/
+
+float Calculate_SimpleMovingAverage(float AttributeValue[], int NoOfEnteries)
+{
+  float AttributeAverage = 0;
+  float AttributeSum = 0;
+  for(int i=(NoOfEnteries-5); i< NoOfEnteries; i++)
+   {
+     AttributeSum+= AttributeValue[i];
+     
+   }
+   AttributeAverage = AttributeSum/5;
+
+   return AttributeAverage;
+  
+}
+
+
+
+/******************************************************************************************************************************
+ * Function: ReceiveDatafromSender
+ * Description: This function reads the data from Sender, calculates the Min, max and average value of BMS_attribute.	  
+ * returns: The operation was successful
+ *****************************************************************************************************************************/
+OperationMode ReceiveDatafromSender ()
+{
+    OperationMode ReadStatus= Failure;
+    ReadStatus= BMS_ReadfromConsole();
+    //printf("%d\n",NoOfEntery);
+    if (ReadStatus)
+    	{
+	    Calculate_TemperatureMinandMaxRange(NoOfEntery);
+	    Calculate_SoCMinandMaxRange(NoOfEntery);
+	    Calculate_TemperatureSimpleMovingAverage(NoOfEntery);
+	    Calculate_SoCSimpleMovingAverage(NoOfEntery);
+        }
+    return (ReadStatus);
 }

@@ -4,7 +4,7 @@ Include header files
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-
+#include <cstdio.h>
 #include "Receiver.h"
 
 /***********************************************************************************************************************

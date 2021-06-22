@@ -32,7 +32,7 @@ OperationMode BMS_ReadfromConsole()
   int line=1, Index=0;
   OperationMode ReadStatus= Failure;
 
-  BMS_datafile=fopen("BMS_attributelog.txt", "r");
+  BMS_datafile=fopen("BMS_RxData.txt", "r");
   if (BMS_datafile==NULL)
     {
       printf("File open attempt failed\n");

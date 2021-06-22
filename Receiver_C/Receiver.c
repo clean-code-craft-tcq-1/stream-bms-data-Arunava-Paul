@@ -1,10 +1,9 @@
-**********************************************
+/**********************************************
 Include header files
 ***********************************************/
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <cstdio.h>
 #include "Receiver.h"
 
 /***********************************************************************************************************************
@@ -33,7 +32,7 @@ OperationMode BMS_ReadfromConsole()
   int line=1, Index=0;
   OperationMode ReadStatus= Failure;
 
-  BMS_datafile=fopen("Sender_C/BMS_RxData.txt", "r");
+  BMS_datafile=fopen("BMS_attributelog.txt", "r");
   if (BMS_datafile==NULL)
     {
       printf("File open attempt failed\n");

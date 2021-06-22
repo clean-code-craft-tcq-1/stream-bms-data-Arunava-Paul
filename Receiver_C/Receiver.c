@@ -194,9 +194,9 @@ void RxCalculate_FromBMSParam()
 }
  
 //#ifdef MAIN
-void main()
+int main()
 {
     RxCalculate_FromBMSParam();
-   
+   return 0;
 }
 //#endif

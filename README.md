@@ -57,18 +57,18 @@ This section lists the minimum functionality of the Sender and Receiver.
 
 ### The Sender
 
-- sends at least two Battery / Charging parameters
+- sends at least two Battery / Charging parameters -BMS Temperature and State-Of-Charge
 - sends these parameters in a stream (keeps sending automatically till the user stops)
-- can either generate random values for the parameters, or read from a file
+- Sender reads from a CSV file
 - uses console output to communicate the parameters.
 
 ### The Receiver
 
-- reads the parameters from the console input
+- reads the parameters from the Rx file
 - after reading every parameter, it prints the following:
     - maximum and minimum values in the incoming stream
     - [simple moving average](https://www.investopedia.com/terms/s/sma.asp) of the last 5 values
 
 ## Quality Parameters
 
-Setup the quality parameters of your project (duplication, complexity, coverage, warnings) using the GitHub workflow yml files.
+Quality parameters  like duplication, complexity, coverage, warning are set  using the GitHub workflow yml files.

@@ -2,7 +2,7 @@
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
 
 #include "Receiver_C/test/catch.hpp"
-#include "bms_receiver.h"
+#include "Receiver.h"
 
 TEST_CASE("To check if file was successfully opened to read") 
 {
